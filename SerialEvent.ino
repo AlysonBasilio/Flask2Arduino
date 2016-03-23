@@ -1,11 +1,11 @@
 /*
- * Serial Relay Controller
- * 
- * Serial readings were extracted from
- * http://www.arduino.cc/en/Tutorial/SerialEvent
- * 
- * This code swiches pins according to a list of strings.
- */
+   Serial Relay Controller
+
+   Serial readings were extracted from
+   http://www.arduino.cc/en/Tutorial/SerialEvent
+
+   This code swiches pins according to a list of strings.
+*/
 
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
@@ -19,8 +19,8 @@ int array[] = {ch1, ch2, ch3, ch4};
 
 void setup() {
   // Initialize pins
-  for (int i = 0; i<4; i++){
-   pinMode(array[i], OUTPUT);
+  for (int i = 0; i < 4; i++) {
+    pinMode(array[i], OUTPUT);
   }
 
   // initialize serial:
@@ -32,8 +32,9 @@ void setup() {
   inputString.reserve(200);
 }
 
-void switchPin(int pin){
-  if (digitalRead(pin)){
+void switchPin(int pin) {
+  delay(200);
+  if (digitalRead(pin)) {
     digitalWrite(pin, LOW);
   }
   else {
@@ -47,25 +48,25 @@ void loop() {
     inputString.trim();
     Serial.println(inputString);
 
-    if (inputString.equalsIgnoreCase("luzes")){
+    if (inputString.equalsIgnoreCase("ventilador")) {
       switchPin(ch1);
     };
 
-    if (inputString.equalsIgnoreCase("cafeteira")){
+    if (inputString.equalsIgnoreCase("carregador")) {
       switchPin(ch2);
     };
 
-    if (inputString.equalsIgnoreCase("ventilador")){
+    if (inputString.equalsIgnoreCase("luzes")) {
       switchPin(ch3);
     };
 
-    if (inputString.equalsIgnoreCase("sabre de luz")){
+    if (inputString.equalsIgnoreCase("pc")) {
       switchPin(ch4);
     };
 
-    if (inputString.equalsIgnoreCase("todos")){
-      for (int i = 0; i<4; i++){
-       switchPin(array[i]);
+    if (inputString.equalsIgnoreCase("todos")) {
+      for (int i = 0; i < 4; i++) {
+        switchPin(array[i]);
       }
     };
 
@@ -77,10 +78,10 @@ void loop() {
 
 /*
   SerialEvent occurs whenever a new data comes in the
- hardware serial RX.  This routine is run between each
- time loop() runs, so using delay inside loop can delay
- response.  Multiple bytes of data may be available.
- */
+  hardware serial RX.  This routine is run between each
+  time loop() runs, so using delay inside loop can delay
+  response.  Multiple bytes of data may be available.
+*/
 void serialEvent() {
   while (Serial.available()) {
     // get the new byte:
@@ -92,7 +93,7 @@ void serialEvent() {
     if (inChar == '\n') {
       stringComplete = true;
     }
+    
   }
 }
-
 
