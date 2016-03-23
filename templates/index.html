@@ -1,13 +1,20 @@
 <html>
 <head>
     <title>Arduino tutorial</title>
+    <link rel="stylesheet" href="static/app.css">
 </head>
 <body>
-    <h1>Hello world</h1>
+    <h1>Lista de equipamentos</h1>
     <form action="" method="post" accept-charset="utf-8">
         <input type="text" name="action" placeholder="Digite qualquer coisa">
         <button type="submit">Enviar</button>
-        <pre>{{action}}</pre>
+        <!--<pre>{{action}}</pre>-->
+        Canais:
+        <ul>
+            {% for channel, state in channels.iteritems() %}
+            <li class='{{state}}'>{{channel}}</li>
+            {% endfor %}
+        </ul>
     </form>
 </body>
 </html>
